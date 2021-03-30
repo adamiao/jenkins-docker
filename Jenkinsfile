@@ -1,6 +1,6 @@
 pipeline {
 	agent any
-    triggers {
+    	triggers {
 		githubPush()
 	}
 	environment	{
@@ -43,9 +43,9 @@ pipeline {
 			}
 		}
 	}
-    post { 
-        always { 
-            cleanWs()
-        }
-    }
+	post {
+		always {
+			cleanWs()
+		}
+	}
 }
