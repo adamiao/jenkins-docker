@@ -22,11 +22,14 @@ LABEL maintainer="FirstName LastName <email@email.com>" \
 # Change to root user to be able to run commands
 USER root
 
-# Run update and install Docker client
+# Run update/upgrade, install Docker client, then cleanup
 RUN apt-get update && \
 apt-get -y install && \
 curl -fsSL https://get.docker.com -o get-docker.sh && \
-sh get-docker.sh
+sh get-docker.sh && \
+apt-get -y autoremove && \
+apt-get clean autoclean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add 'jenkins' user to the 'docker' group
 RUN usermod -aG Docker jenkins
